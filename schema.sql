@@ -1,25 +1,25 @@
 create table organization
 (
-    organization_id int unsigned not null auto_increment,
+    organization_id int unsigned not null auto_increment primary key,
     name text,
     type text,
     note text,
     size text,
     description text,
     qr_url text,
-    url text,
+    url text
 );
 
 create table organization_contact
 (
     organization_id int unsigned,
     contact_type enum('email', 'phone', 'mobile', 'website', 'skype', 'twitter'),
-    contact_info text,
+    contact_info text
 );
 
 create table project
 (
-    project_id int unsigned not null auto_increment,
+    project_id int unsigned not null auto_increment primary key,
     disaster int unsigned not null,
     name text,
     type text,
@@ -28,18 +28,18 @@ create table project
     date_start date,
     date_end date,
     funded enum('yes', 'no'),
-    lending_type text,
+    lending_type text
 );
 
 create table organization_project
 (
     organization_id int unsigned,
-    project_id int unsigned,
+    project_id int unsigned
 );
 
 create table disaster
 (
-    disaster_id int unsigned not null auto_increment,
+    disaster_id int unsigned not null auto_increment primary key,
     location_lat text,
     location_lon text,
     name text,
@@ -48,5 +48,5 @@ create table disaster
     type text,
     population_affected int unsigned,
     severity text,
-    lending_type enum('none', 'IDA', 'BBDV'),
+    lending_type enum('none', 'IDA', 'BBDV')
 );

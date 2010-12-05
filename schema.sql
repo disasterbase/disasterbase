@@ -1,13 +1,13 @@
--- drop table user;
--- drop table media;
--- drop table organization;
--- drop table organization_media;
--- drop table organization_contact;
--- drop table project;
--- drop table project_media;
--- drop table organization_project;
--- drop table organization_project_media;
--- drop table disaster;
+drop table if exists user;
+drop table if exists media;
+drop table if exists organization;
+drop table if exists organization_media;
+drop table if exists organization_contact;
+drop table if exists project;
+drop table if exists project_media;
+drop table if exists organization_project;
+drop table if exists organization_project_media;
+drop table if exists disaster;
 
 create table media
 (

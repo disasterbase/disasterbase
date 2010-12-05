@@ -1,0 +1,16 @@
+<%args>
+$id
+$table
+</%args>
+<%perl>
+my $sqldb = Disaster::SQLEngine::sqldb();
+# add some error protection here to confirm table name is valid
+
+# add log the delete
+$sqldb->do_delete(
+	table => $table, 
+	where => $table . '_id=' . $id
+);
+
+$m->redirect( '/admin' );
+</%perl>

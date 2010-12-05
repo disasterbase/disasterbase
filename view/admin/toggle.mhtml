@@ -1,0 +1,24 @@
+<%args>
+$id
+$table
+$column
+$value => ''
+</%args>
+<%perl>
+my $sqldb = Disaster::SQLEngine::sqldb();
+# add some error protection here to confirm table name is valid
+my $data = $sqldb->fetch_one(table => $table, where => $table . '_id=' . $id);
+
+# add some error protection here to confirm column name is valid
+$value = ($data->{$column} ? '' : 1 ) unless $value;
+$data->{$column} = $value;
+
+# add log the update, and check to make sure it worked
+$sqldb->do_update(
+	table => $table, 
+	where => $table . '_id=' . $id,
+	values => $data
+);
+
+$m->redirect( '/admin' );
+</%perl>

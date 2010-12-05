@@ -12,6 +12,7 @@ create table user
 create table organization
 (
     organization_id int unsigned not null auto_increment primary key,
+	approved tinyint,
     name text,
     type text,
     note text,
@@ -34,6 +35,7 @@ create table organization_contact
 create table project
 (
     project_id int unsigned not null auto_increment primary key,
+	approved tinyint,
     disaster_id int unsigned not null,
     name text,
     type text,
@@ -55,6 +57,7 @@ create table organization_project
 create table disaster
 (
     disaster_id int unsigned not null auto_increment primary key,
+	approved tinyint,
     location_lat text,
     location_lon text,
     name text,

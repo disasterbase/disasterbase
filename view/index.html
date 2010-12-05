@@ -7,28 +7,17 @@
 	<script type="text/javascript" src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
 	<script type="text/javascript" src="handlers.js"></script>
 	<link type="text/css" rel="stylesheet" href="style.css" />
-	<script type="text/javascript">
-		$(document).ready(function () {
-			$.ajax({
-				url: 'dumb.cgi',
-				cache: false,
-				dataType: 'json',
-				data: {},
-				success: render_results
-			});
-		});
-	</script>
 </head>
 <body>
-	<div id="head_info"></div>
-	<div id="head_map">
-		<div id="map_container"></div>
+	<div id="main_cont">
+		<div id="head_info"></div>
+		<div id="head_map"></div>
+		<div id="main">
+			<div id="col1"></div>
+			<div id="col2"></div>
+		</div>
+		<div id="footer"></div>
 	</div>
-	<div id="main">
-		<div id="col1"></div>
-		<div id="col2"></div>
-	</div>
-	<div id="footer"></div>
 
 
 
@@ -51,13 +40,31 @@
 			<div class="date"><%= disaster.days %> days ago</div>
 		</div>
 	</script>
-	<script type="test/jst" id="organization_logo">
+	<script type="text/jst" id="organization_logo">
 		<img src="<%= logo_url %>" />
 	</script>
-	<script type="test/jst" id="image">
+	<script type="text/jst" id="image">
 		<div class="image_cont">
 			<div class="image"><img src="<%= url %>" class="image" /></div>
 			<div class="caption"><%= caption %></div>
+		</div>
+	</script>
+	<script type="text/jst" id="page">
+		<span class="page" id="page_<%= counter %>">&bull;</span>
+	</script>
+	<script type="text/jst" id="organization_details">
+		<div class="organization_name"><%= name %></div>
+		<div class="organization_type"><%= type %></div>
+		<div class="organization_size"><%= size %></div>
+		<div class="organization_logo"><img src="<%= logo_url %>" /></div>
+		<div class="organization_description"><%= description %></div>
+		<div class="organization_url"><%= url %></div>
+		<div class="organization_qr"><img src="<%= qr_url %>" /></div>
+	</script>
+	<script type="text/jst" id="feed_entry">
+		<div class="entry">
+			<em class="date"><%= days %> days ago</em>
+			<p class="description"><%= description %></p>
 		</div>
 	</script>
 </body>

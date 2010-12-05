@@ -1,2 +1,3 @@
 AddType application/javascript .json
+AddType application/rss+xml .rss
 Options +ExecCGI 

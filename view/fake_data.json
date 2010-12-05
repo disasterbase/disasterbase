@@ -1,12 +1,3 @@
-#!/usr/bin/perl
-
-use strict;
-use warnings;
-use CGI;
-
-print CGI->header('application/json');
-
-print << "FINI";
 {
 	"disasters": [
 		{
@@ -44,7 +35,26 @@ print << "FINI";
 								"qr_url": "http://www.the2dcode.com/qr-code/120994",
 								"url": "http://www.redcross.org",
 								"logo_url": "http://www.redcross.org/files/site/images/logo.gif",
-								"feed_url": "http://twitter.com/favorites/13907922.rss",
+								"feed_url": "rss.rss",
+								"contacts": [
+									{
+										"contact_type": "twitter",
+										"contact_info": "http://twitter.com/juancmuller"
+									}
+								]
+							},
+							{
+								"organization_id": 2,
+								"name": "Red Cross 2",
+								"type": "NGO",
+								"note": "",
+								"size": "Large",
+								"description": "Something rather nice",
+								"qr_url": "http://www.the2dcode.com/qr-code/120994",
+								"url": "http://www.redcross.org",
+								"logo_url": "http://www.redcross.org/files/site/images/logo.gif",
+								"feed_url": "rss.rss",
+								"feed_url_": "http://twitter.com/favorites/13907922.rss",
 								"contacts": [
 									{
 										"contact_type": "twitter",
@@ -81,4 +91,3 @@ print << "FINI";
 		}
 	]
 }
-FINI

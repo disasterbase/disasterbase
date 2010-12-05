@@ -2,8 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?v=3.3&sensor=false"></script>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js?v=3.1&sensor=false"></script>
 	<script type="text/javascript" src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
 	<script type="text/javascript" src="handlers.js"></script>
 	<link type="text/css" rel="stylesheet" href="style.css" />
@@ -22,9 +22,12 @@
 <body>
 	<div id="head_info"></div>
 	<div id="head_map">
-		<div id="map-container"></div>
+		<div id="map_container"></div>
 	</div>
-	<div id="main"></div>
+	<div id="main">
+		<div id="col1"></div>
+		<div id="col2"></div>
+	</div>
 	<div id="footer"></div>
 
 
@@ -48,8 +51,14 @@
 			<div class="date"><%= disaster.days %> days ago</div>
 		</div>
 	</script>
-	<script type="text/jst" id="organization_logo">
+	<script type="test/jst" id="organization_logo">
 		<img src="<%= logo_url %>" />
+	</script>
+	<script type="test/jst" id="image">
+		<div class="image_cont">
+			<div class="image"><img src="<%= url %>" class="image" /></div>
+			<div class="caption"><%= caption %></div>
+		</div>
 	</script>
 </body>
 </html>

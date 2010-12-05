@@ -15,8 +15,8 @@ print << "FINI";
 				"area_abbreviation": "LAC",
 				"area_name": "Latin America & Caribbean",
 				"lending_type": "IDA",
-				"location_lat": "40.7483282",
-				"location_lon": "-73.9962255",
+				"location_lat": "19.15",
+				"location_lon": "-72.29",
 				"name": "Haiti",
 				"population_affected": 100000,
 				"severity": "high",
@@ -53,6 +53,28 @@ print << "FINI";
 								]
 							}
 						]
+					}
+				],
+				"images": [
+					{
+						"caption": "People doing something or other.",
+						"url": "http://www.amigosdeperu.org/STORE/haiti-disaster-2010.jpg"
+					},
+					{
+						"caption": "People doing something or other.",
+						"url": "http://frontiersfoundation.ca/system/files/images/DSC04685.preview.JPG"
+					},
+					{
+						"caption": "People doing something or other.",
+						"url": "http://cdn.necolebitchie.com/wp-content/uploads/2010/01/haiti-disaster-2.jpg"
+					},
+					{
+						"caption": "",
+						"url": "http://media.komonews.com/images/100117_haiti_disaster.jpg"
+					},
+					{
+						"caption": "",
+						"url": "http://www.about-knowledge.com/wp-content/uploads/2010/01/haiti-disaster-relief.jpg"
 					}
 				]
 			}

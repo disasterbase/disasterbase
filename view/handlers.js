@@ -61,7 +61,7 @@ var render_results = function (dis)
 		});
 
 		template = _.template($("#image").html());
-		$.each(this.disaster.images, function () {
+		$.each(this.disaster.media, function () {
 			col2.append(template(this));
 		});
 

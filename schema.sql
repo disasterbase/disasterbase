@@ -6,6 +6,7 @@ create table organization
     note text,
     size text,
     description text,
+    logo_url text,
     qr_url text,
     url text
 );
@@ -24,7 +25,6 @@ create table project
     name text,
     type text,
     description text,
-    feed_url text,
     date_start date,
     date_end date,
     funded enum('yes', 'no'),
@@ -34,7 +34,8 @@ create table project
 create table organization_project
 (
     organization_id int unsigned,
-    project_id int unsigned
+    project_id int unsigned,
+    feed_url text
 );
 
 create table disaster

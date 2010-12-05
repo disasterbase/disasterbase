@@ -1,0 +1,8 @@
+<%attr>
+title => 'Logging out.'
+</%attr>
+<%init>
+	Disaster::Authentication::log_out();
+	$m->redirect('loggedout.mhtml');
+</%init>
+

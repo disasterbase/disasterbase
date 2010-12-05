@@ -1,0 +1,27 @@
+package WisCon::libs;
+
+use strict;
+
+######################################################################
+
+use WisCon::Mason;
+use WisCon::Session;
+use WisCon::SQLEngine;
+use WisCon::DateTime;
+use WisCon::Email;
+use WisCon::Person;
+use WisCon::ProgramItem;
+use WisCon::Ref;
+use WisCon::Convention;
+use WisCon::Catalog;
+use WisCon::Order;
+
+use WisCon::Authentication;
+use WisCon::Authorization;
+
+use WisCon::WebFormBuilder;
+use WisCon::WebTableBuilder;
+
+######################################################################
+
+1;

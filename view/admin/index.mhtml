@@ -1,0 +1,3 @@
+<%perl>
+$m->redirect('/') unless Disaster::Authentication::i_am_god(); 
+</%perl>

@@ -41,6 +41,23 @@ sub user_exists {
 	return 0;
 }
 
+sub fetch_user {
+	my ( $user_id ) = @_;
+	
+	my $user = Disaster::SQLEngine->sqldb()->fetch_one( 
+		table => 'user', 
+		where => { user_id => $user_id },
+	);
+	return $user;
+}
+
+sub i_am_god {
+	my $user;
+	$user = current_user();
+	return 1 if ref($user) && $user->{god};
+	return 0;
+}
+
 sub process_authentication {
 	my ( $email, $password ) = @_;
 	my $result = attempt_authentication( $email, $password );
@@ -82,7 +99,7 @@ sub current_user {
 	current_user_id()
 	  or return;
     
-	Disaster::Person->find_user(current_user_id());
+	fetch_user(current_user_id());
 }
 
 

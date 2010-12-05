@@ -1,13 +1,13 @@
--- drop table user;
--- drop table media;
--- drop table organization;
--- drop table organization_media;
--- drop table organization_contact;
--- drop table project;
--- drop table project_media;
--- drop table organization_project;
--- drop table organization_project_media;
--- drop table disaster;
+drop table if exists user;
+drop table if exists media;
+drop table if exists organization;
+drop table if exists organization_media;
+drop table if exists organization_contact;
+drop table if exists project;
+drop table if exists project_media;
+drop table if exists organization_project;
+drop table if exists organization_project_media;
+drop table if exists disaster;
 
 create table media
 (
@@ -29,6 +29,7 @@ create table user
 create table organization
 (
     organization_id int unsigned not null auto_increment primary key,
+	approved tinyint,
     name            text,
     type            text,
     note            text,
@@ -41,6 +42,7 @@ create table organization
 
 create table organization_media
 (
+    organization_media_id int unsigned not null auto_increment primary key,
     organization_id int unsigned,
     media_id        int unsigned
 );
@@ -49,21 +51,16 @@ create table organization_contact
 (
     organization_contact_id int unsigned not null auto_increment primary key,
     organization_id int unsigned,
-<<<<<<< HEAD
-    contact_type    enum('email', 'phone', 'mobile', 'website', 'skype', 'twitter'),
-    contact_info    text
-=======
     contact_type enum('email', 'phone', 'mobile', 'website', 'skype', 'twitter'),
     contact_info text,
 	contact_name text
->>>>>>> 22570017f3603fedf55bffbc1517e317f5bfb8cf
 );
 
 create table project
 (
-<<<<<<< HEAD
     project_id      int unsigned not null auto_increment primary key,
-    disaster        int unsigned not null,
+	approved tinyint,
+    disaster_id     int unsigned not null,
     name            text,
     type            text,
     description     text,
@@ -75,25 +72,14 @@ create table project
 
 create table project_media
 (
+    project_media_id      int unsigned not null auto_increment primary key,
     project_id  int unsigned,
     media_id    int unsigned
-=======
-    project_id int unsigned not null auto_increment primary key,
-    disaster_id int unsigned not null,
-    name text,
-    type text,
-    description text,
-    date_start date,
-    date_end date,
-    funded enum('yes', 'no'),
-    lending_type text
->>>>>>> 22570017f3603fedf55bffbc1517e317f5bfb8cf
 );
 
 create table organization_project
 (
     organization_project_id int unsigned not null auto_increment primary key,
-<<<<<<< HEAD
     organization_id         int unsigned,
     project_id              int unsigned,
     feed_url                text
@@ -101,18 +87,15 @@ create table organization_project
 
 create table organization_project_media
 (
+    organization_project_media_id int unsigned not null auto_increment primary key,
     organization_project_id int unsigned,
     media_id                int unsigned
-=======
-    organization_id int unsigned,
-    project_id int unsigned,
-    feed_url text
->>>>>>> 22570017f3603fedf55bffbc1517e317f5bfb8cf
 );
 
 create table disaster
 (
     disaster_id         int unsigned not null auto_increment primary key,
+	approved tinyint,
     location_lat        text,
     location_lon        text,
     name                text,

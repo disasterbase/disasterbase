@@ -44,15 +44,6 @@ var render_results = function (dis)
 
 	var template  = _.template($("#header_template").html());
 
-	var ds;
-	if (dis)
-		if (dis.disasters)
-			console.log(dis.disasters);
-		else
-			console.log(dis);
-
-	console.log(dis);
-
 	$.each(dis.disasters, function () {
 		var today = new Date();
 		var start = new Date(this.disaster.date_start);
@@ -93,9 +84,7 @@ var show_organizations = function (organizations)
 	render_pager(len);
 	var i = 0;
 
-	console.log("Show organzation");
 	show_organization(organizations, i, len);
-	console.log("Finishing iteration");
 };
 
 var show_organization = function (organizations, i, all)
@@ -149,7 +138,7 @@ var render_pager = function (count)
 do_magical_things = function ()
 {
 	$.ajax({
-		url: 'fake_data.json',
+		url: 'get_disasters.mhtml',
 		cache: false,
 		dataType: 'json',
 		data: {},

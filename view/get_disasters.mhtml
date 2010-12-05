@@ -57,4 +57,4 @@ foreach my $disaster (@$disasters)
 my $json = encode_json( $data );
 </%perl>
 
-<% $jsonp ? "$jsonp($json)" : $json %>
+<% $jsonp ? "$jsonp($json)" : $json |n %>

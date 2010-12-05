@@ -35,7 +35,7 @@
 								"qr_url": "http://www.the2dcode.com/qr-code/120994",
 								"url": "http://www.redcross.org",
 								"logo_url": "http://www.redcross.org/files/site/images/logo.gif",
-								"feed_url": "rss.rss",
+								"feed_url": "http://twitter.com/status/user_timeline/juancmuller.json?count=25&callback=display_tweets",
 								"contacts": [
 									{
 										"contact_type": "twitter",
@@ -53,7 +53,7 @@
 								"qr_url": "http://www.the2dcode.com/qr-code/120994",
 								"url": "http://www.redcross.org",
 								"logo_url": "http://www.redcross.org/files/site/images/logo.gif",
-								"feed_url": "rss.rss",
+								"feed_url": "http://twitter.com/status/user_timeline/fwdmedia.json?count=25&callback=display_tweets",
 								"feed_url_": "http://twitter.com/favorites/13907922.rss",
 								"contacts": [
 									{

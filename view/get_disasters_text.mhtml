@@ -6,8 +6,8 @@
     $jsonp => 0
 </%args>
 <%perl>
-$r->content_type('application/json');
-#$r->content_type('text/plain');
+#$r->content_type('application/json');
+$r->content_type('text/plain');
 
 my $sqldb = Disaster::SQLEngine::sqldb;
 
@@ -19,7 +19,7 @@ foreach my $disaster (@$disasters)
 {
     $disaster->{projects} = [];
     $disaster->{media} = [];
-    push @{$data->{disasters}}, { disaster => $disaster };
+    push @{$data->{disasters}}, $disaster;
 
     my $disaster_media = $sqldb->fetch_sql("SELECT * FROM media WHERE media_id IN (SELECT media_id FROM disaster_media WHERE disaster_id=$disaster->{disaster_id});");
     push @{$disaster->{media}}, @$disaster_media;
@@ -56,5 +56,7 @@ foreach my $disaster (@$disasters)
 
 my $json = encode_json( $data );
 </%perl>
+
+<% Dumper($data) |n %>
 
 <% $jsonp ? "$jsonp($json)" : $json |n %>

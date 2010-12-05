@@ -1,6 +1,7 @@
 create table user 
 	( 
 		user_id int unsigned not null auto_increment primary key, 
+    	organization_id int unsigned,
 		email text, 
 		password text,
 		approved tinyint,
@@ -26,7 +27,8 @@ create table organization_contact
     organization_contact_id int unsigned not null auto_increment primary key,
     organization_id int unsigned,
     contact_type enum('email', 'phone', 'mobile', 'website', 'skype', 'twitter'),
-    contact_info text
+    contact_info text,
+	contact_name text
 );
 
 create table project

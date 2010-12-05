@@ -1,3 +1,13 @@
+create table user 
+	( 
+		user_id int unsigned not null auto_increment primary key, 
+		email text, 
+		password text,
+		approved tinyint,
+		god tinyint
+	);
+
+
 create table organization
 (
     organization_id int unsigned not null auto_increment primary key,
@@ -13,6 +23,7 @@ create table organization
 
 create table organization_contact
 (
+    organization_contact_id int unsigned not null auto_increment primary key,
     organization_id int unsigned,
     contact_type enum('email', 'phone', 'mobile', 'website', 'skype', 'twitter'),
     contact_info text
@@ -21,7 +32,7 @@ create table organization_contact
 create table project
 (
     project_id int unsigned not null auto_increment primary key,
-    disaster int unsigned not null,
+    disaster_id int unsigned not null,
     name text,
     type text,
     description text,
@@ -33,6 +44,7 @@ create table project
 
 create table organization_project
 (
+    organization_project_id int unsigned not null auto_increment primary key,
     organization_id int unsigned,
     project_id int unsigned,
     feed_url text

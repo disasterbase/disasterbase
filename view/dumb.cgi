@@ -54,6 +54,28 @@ print << "FINI";
 							}
 						]
 					}
+				],
+				"images": [
+					{
+						"caption": "People doing something or other.",
+						"url": "http://www.amigosdeperu.org/STORE/haiti-disaster-2010.jpg"
+					},
+					{
+						"caption": "People doing something or other.",
+						"url": "http://frontiersfoundation.ca/system/files/images/DSC04685.preview.JPG"
+					},
+					{
+						"caption": "People doing something or other.",
+						"url": "http://cdn.necolebitchie.com/wp-content/uploads/2010/01/haiti-disaster-2.jpg"
+					},
+					{
+						"caption": "",
+						"url": "http://media.komonews.com/images/100117_haiti_disaster.jpg"
+					},
+					{
+						"caption": "",
+						"url": "http://www.about-knowledge.com/wp-content/uploads/2010/01/haiti-disaster-relief.jpg"
+					}
 				]
 			}
 		}

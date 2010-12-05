@@ -24,7 +24,10 @@
 	<div id="head_map">
 		<div id="map_container"></div>
 	</div>
-	<div id="main"></div>
+	<div id="main">
+		<div id="col1"></div>
+		<div id="col2"></div>
+	</div>
 	<div id="footer"></div>
 
 
@@ -48,8 +51,14 @@
 			<div class="date"><%= disaster.days %> days ago</div>
 		</div>
 	</script>
-	<script type="text/jst" id="organization_logo">
+	<script type="test/jst" id="organization_logo">
 		<img src="<%= logo_url %>" />
+	</script>
+	<script type="test/jst" id="image">
+		<div class="image_cont">
+			<div class="image"><img src="<%= url %>" class="image" /></div>
+			<div class="caption"><%= caption %></div>
+		</div>
 	</script>
 </body>
 </html>

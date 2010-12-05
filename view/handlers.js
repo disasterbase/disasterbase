@@ -3,7 +3,8 @@ var render_results = function (data, textStatus, req) {
 
 	var head_info = $("#head_info");
 	var head_map  = $("#head_map");
-	var main      = $("#main");
+	var col1      = $("#col1");
+	var col2      = $("#col2");
 	var footer    = $("#footer");
 
 	var template  = _.template($("#header_template").html());
@@ -17,12 +18,17 @@ var render_results = function (data, textStatus, req) {
 		var projects = this.disaster.projects;
 		$.each(projects, function () {
 			var organizations = this.organizations;
+			template = _.template($("#organization_logo").html());
 			$.each(organizations, function () {
-				var template = _.template($("#organization_logo").html());
-
 				for (var i = 0; i < 10; i++)
-					main.append(template(this));
+					col1.append(template(this));
 			});
+		});
+
+		var images = this.disaster.images;
+		template = _.template($("#image").html());
+		$.each(images, function () {
+			col2.append(template(this));
 		});
 
 		new google.maps.Map(document.getElementById("map_container"), {

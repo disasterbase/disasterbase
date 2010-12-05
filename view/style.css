@@ -70,4 +70,33 @@ div#head_map div#map_container
 div#main
 {
 	padding: 10px;
+	position: relative;
+	height: 100%;
+}
+
+div#main div#col1,
+div#main div#col2
+{
+	width: 50%;
+	height: 100%;
+	overflow: hidden;
+	display: inline;
+	position: absolute;
+	top: 10px;
+}
+
+div#main div#col1
+{
+	left: 10px;
+}
+
+div#main div#col2
+{
+	right: 10px;
+	font-size: 15px;
+}
+
+div#main div#col2 img
+{
+	width: 350px;
 }

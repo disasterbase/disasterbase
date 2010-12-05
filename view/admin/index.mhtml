@@ -1,30 +1,104 @@
-<%perl>
-$m->redirect('/') unless Disaster::Authentication::i_am_god(); 
-</%perl>
 <h1>Users</h1>
-<pre>
-	<% Data::Dumper::Dumper( Disaster::SQLEngine::sqldb->fetch_select(
+<%perl>
+my $rows = Disaster::SQLEngine::sqldb->fetch_select(
 			table => 'user', order => 'approved'
-		)) %>
-</pre>
+);
+my @fields = (
+	{
+		name => 'email',
+	},
+	{
+		name => 'approved',
+	},
+);
+foreach my $row (@$rows) {
+	foreach my $field (@fields) {
+		if ($field->{name} eq 'approved') {
+			print '&nbsp;<a href=/admin/toggle?table=user&column=approved&id=' . $row->{user_id} . '>' . ($row->{approved} ? 'disapprove' : 'approve') . '</a>' . '<br>';
+		} else {
+			print $row->{$field->{name}} . "\n";
+		}
+	}
+}
+</%perl>
 
 <h1>Organizations</h1>
-<pre>
-	<% Data::Dumper::Dumper( Disaster::SQLEngine::sqldb->fetch_select(
+<%perl>
+$rows = Disaster::SQLEngine::sqldb->fetch_select(
 			table => 'organization', order => 'approved'
-		)) %>
-</pre>
+);
+@fields = (
+	{
+		name => 'name',
+	},
+	{
+		name => 'description',
+	},
+	{
+		name => 'approved',
+	},
+);
+foreach my $row (@$rows) {
+	foreach my $field (@fields) {
+		if ($field->{name} eq 'approved') {
+			print '&nbsp;<a href=/admin/toggle?table=organization&column=approved&id=' . $row->{organization_id} . '>' . ($row->{approved} ? 'disapprove' : 'approve') . '</a>' . '<br>';
+		} else {
+			print $row->{$field->{name}} . "\n";
+		}
+	}
+}
+</%perl>
 
 <h1>Disasters</h1>
-<pre>
-	<% Data::Dumper::Dumper( Disaster::SQLEngine::sqldb->fetch_select(
+<%perl>
+$rows = Disaster::SQLEngine::sqldb->fetch_select(
 			table => 'disaster', order => 'approved'
-		)) %>
-</pre>
+);
+@fields = (
+	{
+		name => 'name',
+	},
+	{
+		name => 'area_abbreviation',
+	},
+	{
+		name => 'approved',
+	},
+);
+foreach my $row (@$rows) {
+	foreach my $field (@fields) {
+		if ($field->{name} eq 'approved') {
+			print '&nbsp;<a href=/admin/toggle?table=disaster&column=approved&id=' . $row->{disaster_id} . '>' . ($row->{approved} ? 'disapprove' : 'approve') . '</a>' . '<br>';
+		} else {
+			print $row->{$field->{name}} . "\n";
+		}
+	}
+}
+</%perl>
 
 <h1>Projects</h1>
-<pre>
-	<% Data::Dumper::Dumper( Disaster::SQLEngine::sqldb->fetch_select(
+<%perl>
+$rows = Disaster::SQLEngine::sqldb->fetch_select(
 			table => 'project', order => 'approved'
-		)) %>
-</pre>
+);
+@fields = (
+	{
+		name => 'name',
+	},
+	{
+		name => 'description',
+	},
+	{
+		name => 'approved',
+	},
+);
+foreach my $row (@$rows) {
+	foreach my $field (@fields) {
+		if ($field->{name} eq 'approved') {
+			print '&nbsp;<a href=/admin/toggle?table=project&column=approved&id=' . $row->{project_id} . '>' . ($row->{approved} ? 'disapprove' : 'approve') . '</a>' . '<br>';
+		} else {
+			print $row->{$field->{name}} . "\n";
+		}
+	}
+}
+</%perl>

@@ -19,7 +19,7 @@ foreach my $disaster (@$disasters)
 {
     $disaster->{projects} = [];
     $disaster->{media} = [];
-    push @{$data->{disasters}}, $disaster;
+    push @{$data->{disasters}}, { disaster => $disaster };
 
     my $disaster_media = $sqldb->fetch_sql("SELECT * FROM media WHERE media_id IN (SELECT media_id FROM disaster_media WHERE disaster_id=$disaster->{disaster_id});");
     push @{$disaster->{media}}, @$disaster_media;

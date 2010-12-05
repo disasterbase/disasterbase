@@ -1,0 +1,39 @@
+<%args>
+	$email => ''
+	$password => ''
+	$submit => 0
+</%args>
+
+<%init>
+	my $error;
+	my $session = Disaster::Session();
+
+	if ( $email or $password or $submit ) {
+	    my $sanitizedemail = Disaster::Email::validate_email($email);
+	    if ($sanitizedemail) {
+			my $result = Disaster::Authentication::process_authentication( $email, $password );
+			if ( ! ref $result ) {
+				$error = $result;
+			}
+		} else {
+	      $error = "Invalid e-mail address.";
+		}
+	}
+</%init>
+
+<form method="POST" action="login">
+				Log in to the Disaster Panel
+				<br>
+% if ($error) {
+				<font color=red><% $error %></font>
+				<br>
+% }
+						<label for="email">Email</label>
+						<input id="email" type="text" name="email" value="<% $email %>" maxlength="45" />
+						<br>
+						<label for="password">Password</label>
+						<input id="password" type="password" name="password" value="<% $password %>" />
+						<input type="submit" name="submit" value="Log In" />
+						<br>
+						<a href="create.mhtml">Create an Account</a>
+</form>

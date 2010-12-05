@@ -2,35 +2,63 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?v=3.3&sensor=false"></script>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
 	<script type="text/javascript" src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
-	<link rel="stylesheet" href="style.css" />
+	<script type="text/javascript" src="handlers.js"></script>
+	<link type="text/css" rel="stylesheet" href="style.css" />
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$.ajax({
+				url: 'dumb.cgi',
+				cache: false,
+				dataType: 'json',
+				data: {},
+				success: render_results
+			});
+		});
+	</script>
 </head>
 <body>
-	<div id="header">
-		<div id="head_info">
-			<div id="reg_name"></div>
-			<div id="cty_name"></div>
-			<ul id="disaster_info">
-				<li id="dis_type"></li>
-				<li id="dis_level"></li>
-				<li id="lending_type"></li>
-				<li id="dis_time"></li>
-			</ul>
-		</div>
-		<div id="head_map"></div>
+	<div id="head_info"></div>
+	<div id="head_map">
+		<div id="map_container"></div>
 	</div>
 	<div id="main">
-		<ul id="org_info">
-			<li id="org_name"></li>
-			<li id="org_type"></li>
-			<li id="org_size"></li>
-			<li id="org_desc"></li>
-			<li id="org_url"></li>
-			<li id="org_qr_code"></li>
-		</ul>
-		<div id="activity"></div>
+		<div id="col1"></div>
+		<div id="col2"></div>
 	</div>
 	<div id="footer"></div>
+
+
+
+	<script type="text/jst" id="header_template">
+		<div class="abbreviation"><%= disaster.area_abbreviation %></div>
+		<div class="name">
+			<%= disaster.name %>
+			<div class="funded">
+				<% if (disaster.funded == 'yes') { %>
+					1
+				<% } else { %>
+					0
+				<% } %>
+			</div>
+		</div>
+		<div class="attributes">
+			<div class="disaster_type"><%= disaster.type %></div>
+			<div class="severity"><%= disaster.severity %></div>
+			<div class="type"><%= disaster.lending_type %></div>
+			<div class="date"><%= disaster.days %> days ago</div>
+		</div>
+	</script>
+	<script type="test/jst" id="organization_logo">
+		<img src="<%= logo_url %>" />
+	</script>
+	<script type="test/jst" id="image">
+		<div class="image_cont">
+			<div class="image"><img src="<%= url %>" class="image" /></div>
+			<div class="caption"><%= caption %></div>
+		</div>
+	</script>
 </body>
 </html>

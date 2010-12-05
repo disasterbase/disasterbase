@@ -10,25 +10,18 @@
 </form>
 
 <%perl>
-use DBIx::SQLEngine;
-my $sqldb = DBIx::SQLEngine->new( "DBI:mysql:un", "un", "p4ls3" );
+my $sqldb = Disaster::SQLEngine::sqldb();
 
 if ( ! $table ) {
   my @tables = $sqldb->detect_table_names();
-  foreach (@tables) {
-	print $_ . "\n<br>";
-  }
+  print '<pre>' . Data::Dumper::Dumper( @tables ) . '</pre>';
 } else {
   my @columns = $sqldb->detect_table( $table );
+  print '<pre>' . Data::Dumper::Dumper( @columns ) . '</pre>';
   if ($ARGS{_submit} eq 'Values') {
     my ($rows, $columns) = $sqldb->fetch_select( table => $table );    
-</%perl>
-
-<%perl>
+  print '<pre>' . Data::Dumper::Dumper( \$rows ) . '</pre>';
   } else {
-</%perl>
-
-<%perl>
   }
 }
 </%perl>

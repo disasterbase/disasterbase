@@ -1,0 +1,78 @@
+<%attr>
+title => 'Create an Account'
+</%attr>
+<%once>
+use Digest::MD5 qw(md5_hex);
+use Mail::Mailer;
+</%once>
+<%init>
+my $sqldb = Disaster::SQLEngine::sqldb();
+
+my %error;
+my $message = "";
+
+if (not %ARGS) {
+    # no processing, just skip to the form below
+} else {
+    # submitting a new registration
+    my $sanitizedemail = Disaster::Email::validate_email($ARGS{email});
+    if ($sanitizedemail) {
+      $ARGS{email} = $sanitizedemail;
+    } elsif ($ARGS{email}) {
+      $error{email} = "Invalid e-mail address.";
+    }
+    if ($ARGS{password} !~ m/^\S+$/) {
+      $error{password} = "Invalid password format";
+    } 
+    if ($ARGS{email} ne $ARGS{"emailconfirm"}) {
+      $error{emailconfirm} = "Email field does not match confirmation.";
+      $ARGS{emailconfirm} = "";
+    } 
+    if ($ARGS{password} ne $ARGS{passwordconfirm}) {
+      $error{passwordconfirm} = "Password field did not match confirmation.";
+      $ARGS{password} = ""; 
+      $ARGS{passwordconfirm} = "";
+    } 
+    if (Disaster::Authentication::user_exists($ARGS{email})) {
+	    $error{email} = "That email address has already been registered.";
+    }
+    unless (keys %error) {
+	my $key = md5_hex($ARGS{password});
+	$sqldb->do_insert( table => 'user',
+			values => {'email'=>"$ARGS{email}", 
+				   'password'=>$key});
+    }
+}
+</%init>
+<form method="POST" action="create.mhtml">
+	Create a Disaster Panel account
+	<br>
+<table border="0" width="400">
+<tr>
+  <td width="200"> Email: <br /> <input type="text" name="email" size="45" value="<% $ARGS{email} %>" /> 
+% if ($error{email}) {
+<br><font color=red><% $error{email} %></font>
+% }
+</td>
+  <td width="200"> Confirm Email: <br /> <input type="text" name="emailconfirm" size="45" value="<% $ARGS{emailconfirm} %>" /> 
+% if ($error{emailconfirm}) {
+<br><font color=red><% $error{emailconfirm} %></font>
+% }
+</td>
+</tr>
+<tr>
+  <td width="200"> Password: <br /> <input type="password" name="password" size="45" /> 
+% if ($error{password}) {
+<br><font color=red><% $error{password} %></font>
+% }
+</td>
+  <td width="200"> Confirm Password: <br /> <input type="password" name="passwordconfirm" size="45" /> 
+% if ($error{passwordconfirm}) {
+<br><font color=red><% $error{passwordconfirm} %></font>
+% }
+</td>
+</tr>
+</table>
+<input type="submit" value="Create Account">
+<input type="reset" value="Reset Fields">
+</form>

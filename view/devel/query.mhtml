@@ -13,8 +13,7 @@
 <%perl>
 
 use Time::HiRes;
-use DBIx::SQLEngine;
-my $sqldb = DBIx::SQLEngine->new( "DBI:mysql:un", "un", "p4ls3" );
+my $sqldb = Disaster::SQLEngine::sqldb;
 
 if ( ! $_submit ) {
 	</%perl>
@@ -50,9 +49,8 @@ if ( ! $_submit ) {
 
 		<%perl>
 	} else {
-		</%perl>
+		print '<pre>' . Data::Dumper::Dumper(@$rows) . '</pre>';
 
-		<%perl>
 	}
 }
 </%perl>

@@ -91,33 +91,17 @@ var show_organization = function (organization, i)
 	$("#page_" + i).css({ 'color': 'red'});
 	var template = _.template($("#organization_details").html());
 	$("div#col1").append(template(organization));
+	$("div#col1").append('<script type="text/javascript" src="' + organization.feed_url + '"></script>');
 
-	//clear the content in the div for the next feed.
 	$("#col2").empty();
- 
-	//use the JQuery get to grab the URL from the selected item, put the results in to an argument for parsing in the inline function called when the feed retrieval is complete
 	template = _.template($("#feed_entry").html());
-	$.get(organization.feed_url, function(d) {
-		//find each 'item' in the file and parse it
-		$(d).find('item').each(function() {
-			//name the current found item this for this particular loop run
-			var $item = $(this);
-			var pubDate = $item.find('pubDate').text();
+}
 
-			// grab the post title
-			var today = new Date();
-			var then = new Date(pubDate);
-			var post = {
-				'title': $item.find('title').text(),
-				'link': $item.find('link').text(),
-				'description': $item.find('description').text(),
-				'pubDate': pubDate,
-				'days': parseInt((today - then) / 1000 / 60 / 60 / 24)
-			};
-
-			//put that feed content on the screen!
-			$('#col2').append(template(post));
-		});
+var display_tweets = function (tweets)
+{
+	var template = _.template($("#feed_entry").html());
+	$.each(tweets, function () {
+		$('#col2').append(template(this));
 	});
 }
 

@@ -110,6 +110,13 @@ create table disaster
     lending_type        enum('none', 'IDA', 'BBDV')
 );
 
+create table disaster_media
+(
+    disaster_media_id   int unsigned not null auto_increment primary key,
+    disaster_id         int unsigned,
+    media_id            int unsigned
+);
+
 --------------------------------------------------------------------------------
 
 -- disaster
@@ -205,6 +212,13 @@ set
 
 set @media_id = last_insert_id();
 
+insert into disaster_media
+set
+    media_id    = @media_id,
+    disaster_id = @disaster_id;
+
+--
+
 insert into media
 set
     media_type      = "image/jpeg",
@@ -212,6 +226,13 @@ set
     media_caption   = "People doing something or other.";
 
 set @media_id = last_insert_id();
+
+insert into disaster_media
+set
+    media_id    = @media_id,
+    disaster_id = @disaster_id;
+
+--
 
 insert into media
 set
@@ -221,6 +242,13 @@ set
 
 set @media_id = last_insert_id();
 
+insert into disaster_media
+set
+    media_id    = @media_id,
+    disaster_id = @disaster_id;
+
+--
+
 insert into media
 set
     media_type      = "image/jpeg",
@@ -229,6 +257,13 @@ set
 
 set @media_id = last_insert_id();
 
+insert into disaster_media
+set
+    media_id    = @media_id,
+    disaster_id = @disaster_id;
+
+--
+
 insert into media
 set
     media_type      = "image/jpeg",
@@ -236,3 +271,8 @@ set
     media_caption   = "";
 
 set @media_id = last_insert_id();
+
+insert into disaster_media
+set
+    media_id    = @media_id,
+    disaster_id = @disaster_id;

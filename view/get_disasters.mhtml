@@ -1,0 +1,24 @@
+<%once>
+    use Data::Dumper;
+    use JSON::XS;
+</%once>
+<%args>
+    $jsonp => 0
+</%args>
+<%perl>
+    #$r->content_type('application/json');
+    $r->content_type('text/plain');
+
+    my $sqldb = Disaster::SQLEngine::sqldb;
+
+    my $data = [ {}, {}, {} ];
+    my $json = encode_json( $data );
+</%perl>
+
+<%perl>
+    my $results = eval { $sqldb->do_sql('SELECT * FROM disaster;') };
+</%perl>
+
+<% $@ ? $@ : Dumper($results) %>
+
+<% $jsonp ? "$jsonp($json)" : $json %>

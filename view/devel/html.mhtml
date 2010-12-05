@@ -1,0 +1,25 @@
+<%args>
+	$html => ''
+	$_submit => 0
+</%args>
+
+<%perl>
+if ( $_submit ) {
+	</%perl>
+
+	<% $html |n %>
+
+	<%perl>
+} else {
+	</%perl>
+
+	<form action="html" method="post">
+		HTML Display: 
+		<input type="submit" name="_submit" value="Go">
+		<br>
+		<textarea name="html" rows="4" cols="80"><% $html %></textarea>
+	</form>
+	
+	<%perl>
+}
+</%perl>

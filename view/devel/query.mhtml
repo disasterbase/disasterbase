@@ -1,0 +1,58 @@
+<%args>
+	$sql => ''
+	$_submit => 0
+</%args>
+
+<form action="query" method="post">
+	SQL Query: 
+	<input type="submit" name="_submit" value="Go">
+	<br>
+	<textarea name="sql" rows="4" cols="80"><% $sql %></textarea>
+</form>
+
+<%perl>
+
+use Time::HiRes;
+use DBIx::SQLEngine;
+my $sqldb = DBIx::SQLEngine->new( "DBI:mysql:un", "un", "p4ls3" );
+
+if ( ! $_submit ) {
+	</%perl>
+	
+	<%perl>
+} elsif ( $sql !~ /^\s*select/i ) {
+	my $results = eval { $sqldb->do_sql( $sql ) };
+	my $error = $@ ? $@ : undef;
+  	if ( $error ) {
+		</%perl>
+		
+			<% $error |h %>
+			
+		<%perl>
+	} else {
+		</%perl>
+		
+			Query completed
+			
+		<%perl>
+	}
+} else {
+	
+	my $timer = Time::HiRes::time();
+	my ($rows, $columns) = eval { $sqldb->fetch_select( sql => $sql ) };
+	$timer = Time::HiRes::time() - $timer;
+	my $error = $@ ? $@ : undef;
+ 
+	if ( $error ) {
+		</%perl>
+
+		<% $error %>
+
+		<%perl>
+	} else {
+		</%perl>
+
+		<%perl>
+	}
+}
+</%perl>

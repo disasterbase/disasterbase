@@ -1,0 +1,34 @@
+<%args>
+  $table => substr( $r->path_info, 1 ) || ''
+</%args>
+
+<form action="tables" method="get">
+	Table Name: 
+	<input name="table" value="<% $table %>" />
+	<input type="submit" name="_submit" value="Fields">
+	<input type="submit" name="_submit" value="Values">
+</form>
+
+<%perl>
+use DBIx::SQLEngine;
+my $sqldb = DBIx::SQLEngine->new( "DBI:mysql:un", "un", "p4ls3" );
+
+if ( ! $table ) {
+  my @tables = $sqldb->detect_table_names();
+  foreach (@tables) {
+	print $_ . "\n<br>";
+  }
+} else {
+  my @columns = $sqldb->detect_table( $table );
+  if ($ARGS{_submit} eq 'Values') {
+    my ($rows, $columns) = $sqldb->fetch_select( table => $table );    
+</%perl>
+
+<%perl>
+  } else {
+</%perl>
+
+<%perl>
+  }
+}
+</%perl>

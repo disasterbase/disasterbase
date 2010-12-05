@@ -1,0 +1,29 @@
+<%init>  
+  my %libs;
+  foreach my $lib ( sort keys %INC ){
+    next if $lib =~ m{^/};
+    my $package = $lib;
+    $package =~ s{.p[ml]$}{};
+    $package =~ s{/}{::}g;
+    no strict;
+    my $version = ${$package . "::VERSION"};
+    my $path = $INC{$lib};
+    $path =~ s{^((?:/(?!warnings)[a-z5][^\/]+)+)/}{};
+    my ($type) = $1;
+    $libs{ $package } = { package => $package, version => $version, path => $path, dir => $type };
+  }
+</%init>  
+
+<h1>
+	Perl Modules Loaded
+</h1>
+
+<p>
+<%perl>
+foreach (sort keys %libs) {
+print '<b>', $libs{ $_ }->{package}, '</b> v',
+$libs{ $_ }->{version}, ' <small>',
+$libs{ $_ }->{dir}, '</small><br>', "\n";
+}
+</%perl>
+</p>

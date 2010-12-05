@@ -1,0 +1,34 @@
+<%args>
+	$perl => ''
+	$_submit => 0
+</%args>
+
+<form action="eval" method="post" class="devel-view-form">
+	Perl Eval: 
+	<input type="submit" name="_submit" value="Go">
+	<br>
+	<textarea name="perl" rows="4" cols="80" class="field-fullwidth"><% $perl %></textarea>
+</form>
+
+<%perl>
+if ( ! $_submit ) {
+	</%perl>
+		Enter Perl code above.
+	<%perl>
+} else {
+	my @results = eval "$perl";
+	if ( $@ ) {
+		</%perl>
+
+		<% $@ %>
+
+		<%perl>
+	} else {
+		</%perl>
+
+		<pre><% Data::Dumper::Dumper( \@results ) %></pre>
+
+		<%perl>
+	}
+}
+</%perl>

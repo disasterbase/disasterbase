@@ -1,0 +1,21 @@
+<h1>Arguments</h1>
+
+% my $url = "http://".$r->server->server_hostname.$r->uri()."?".$r->args;
+<p><b>URL = </b> <% $url %> </p>
+
+<p><b>Mason Version = </b> <% $HTML::Mason::VERSION %></p>
+
+<p><b>@INC = </b>
+<ul>
+% for (@INC) {
+  <li> <% $_ %> </li>
+% }
+</ul></p>
+
+<p><b>Arguments = </b>
+<ul>
+% for (keys %ARGS) {
+  <li> <% $_ %> = <% $ARGS{$_} %> </li>
+% }
+</ul></p>
+

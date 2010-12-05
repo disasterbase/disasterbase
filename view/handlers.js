@@ -19,18 +19,19 @@ var render_results = function (data, textStatus, req) {
 			var organizations = this.organizations;
 			$.each(organizations, function () {
 				var template = _.template($("#organization_logo").html());
-				main.append(template(this));
+
+				for (var i = 0; i < 10; i++)
+					main.append(template(this));
 			});
 		});
 
-		new google.maps.Map($("#map-container"), {
+		new google.maps.Map(document.getElementById("map_container"), {
 			center: new google.maps.LatLng(
 				this.disaster.location_lat,
 				this.disaster.location_lon
 			),
-			zoom: 12,
+			zoom: 7,
 			mapTypeId: google.maps.MapTypeId.ROADMAP
 		});
 	});
 };
-

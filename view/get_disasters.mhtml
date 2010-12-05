@@ -11,7 +11,7 @@ $r->content_type('text/plain');
 
 my $sqldb = Disaster::SQLEngine::sqldb;
 
-my $disasters = $sqldb->fetch_select('SELECT * FROM disaster;');
+my $disasters = $sqldb->fetch_sql('SELECT * FROM disaster;');
 
 my $data = { disasters => [] };
 
@@ -21,30 +21,30 @@ foreach my $disaster (@$disasters)
     $disaster->{media} = [];
     push @{$data->{disasters}}, $disaster;
 
-    my $disaster_media = $sqldb->fetch_select("SELECT * FROM media WHERE media_id IN (SELECT media_id FROM disaster_media WHERE disaster_id=$disaster->{disaster_id});");
+    my $disaster_media = $sqldb->fetch_sql("SELECT * FROM media WHERE media_id IN (SELECT media_id FROM disaster_media WHERE disaster_id=$disaster->{disaster_id});");
     push @{$disaster->{media}}, @$disaster_media;
 
-    my $projects = $sqldb->fetch_select("SELECT * FROM project WHERE disaster_id=$disaster->{disaster_id};");
+    my $projects = $sqldb->fetch_sql("SELECT * FROM project WHERE disaster_id=$disaster->{disaster_id};");
 
     foreach my $project (@$projects)
     {
         $project->{organizations} = [];
         push @{$disaster->{projects}}, $project;
 
-        my $project_media = $sqldb->fetch_select("SELECT * FROM media WHERE media_id IN (SELECT media_id FROM project_media WHERE project_id=$project->{project_id});");
+        my $project_media = $sqldb->fetch_sql("SELECT * FROM media WHERE media_id IN (SELECT media_id FROM project_media WHERE project_id=$project->{project_id});");
         push @{$disaster->{media}}, @$project_media;
 
-        my $organizations = $sqldb->fetch_select("SELECT o.*, op.feed_url FROM organization AS o, organization_project AS op WHERE o.organization_id=op.organization_id AND op.project_id=$project->{project_id};");
+        my $organizations = $sqldb->fetch_sql("SELECT o.*, op.feed_url FROM organization AS o, organization_project AS op WHERE o.organization_id=op.organization_id AND op.project_id=$project->{project_id};");
 
         foreach my $organization (@$organizations)
         {
             $organization->{contacts} = [];
             push @{$project->{organizations}}, $organization;
 
-            my $organization_media = $sqldb->fetch_select("SELECT * FROM media WHERE media_id IN (SELECT media_id FROM organization_media WHERE organization_id=$organization->{organization_id});");
+            my $organization_media = $sqldb->fetch_sql("SELECT * FROM media WHERE media_id IN (SELECT media_id FROM organization_media WHERE organization_id=$organization->{organization_id});");
             push @{$disaster->{media}}, @$organization_media;
 
-            my $contacts = $sqldb->fetch_select("SELECT * FROM organization_contact WHERE organization_id=$organization->{organization_id};");
+            my $contacts = $sqldb->fetch_sql("SELECT * FROM organization_contact WHERE organization_id=$organization->{organization_id};");
 
             foreach my $contact (@$contacts)
             {

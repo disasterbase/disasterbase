@@ -6,8 +6,8 @@
     $jsonp => 0
 </%args>
 <%perl>
-#$r->content_type('application/json');
-$r->content_type('text/plain');
+$r->content_type('application/json');
+#$r->content_type('text/plain');
 
 my $sqldb = Disaster::SQLEngine::sqldb;
 
@@ -56,7 +56,5 @@ foreach my $disaster (@$disasters)
 
 my $json = encode_json( $data );
 </%perl>
-
-<% $@ ? $@ : Dumper($data) %>
 
 <% $jsonp ? "$jsonp($json)" : $json %>

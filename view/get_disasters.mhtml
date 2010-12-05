@@ -16,7 +16,7 @@
 </%perl>
 
 <%perl>
-    my $results = eval { $sqldb->do_sql('SELECT * FROM DISASTER;') };
+    my $results = eval { $sqldb->do_sql('SELECT * FROM disaster;') };
 </%perl>
 
 <% $@ ? $@ : Dumper($results) %>

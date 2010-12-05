@@ -63,9 +63,11 @@
 	</script>
 	<script type="text/jst" id="feed_entry">
 		<div class="entry">
-			<em class="date"><%= created_at %> days ago</em>
 			<p class="description"><%= text %></p>
-			<p class="source"><%= source %></p>
+			<p class="meta">
+				<span class="source">Posted via <%= source %></span>
+				<span class="date"><%= days %></span>
+			</p>
 		</div>
 	</script>
 </body>

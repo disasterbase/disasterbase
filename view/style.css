@@ -123,3 +123,10 @@ div.entry p.meta
 {
 	text-align: right;
 }
+
+div.organization_qr img
+{
+	width: 120px;
+	height: 120px;
+	border: 0;
+}

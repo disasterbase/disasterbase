@@ -174,7 +174,7 @@ insert into organization_project
 set
     organization_id = @organization_id,
     project_id      = @project_id,
-    feed_url        = "http://twitter.com/favorites/13907922.rss";
+    feed_url        = "http://twitter.com/status/user_timeline/juancmuller.json?count=25&callback=display_tweets";
 
 -- organization 2
 insert into organization
@@ -201,7 +201,7 @@ insert into organization_project
 set
     organization_id = @organization_id,
     project_id      = @project_id,
-    feed_url        = "http://twitter.com/favorites/13907922.rss";
+    feed_url        = "http://twitter.com/status/user_timeline/fwdmedia.json?count=25&callback=display_tweets";
 
 -- media
 insert into media

@@ -102,8 +102,8 @@ var show_organization = function (organizations, i, all)
 	$(".page").css({ 'color': 'black'});
 	$("#page_" + i).css({ 'color': 'red'});
 	var template = _.template($("#organization_details").html());
-	$("div#col1").append(template(organization));
 	$("div#col1").append('<script type="text/javascript" src="' + organization.feed_url + '"></script>');
+	$("div#col1").append(template(organization));
 
 	$("#col2").empty();
 	template = _.template($("#feed_entry").html());

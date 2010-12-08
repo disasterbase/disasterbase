@@ -118,9 +118,10 @@ var show_organization = function (organizations, i, all)
 var display_tweets = function (tweets)
 {
 	var template = _.template($("#feed_entry").html());
+
 	$.each(tweets, function () {
 		var today = new Date();
-		var then = new Date(this.created_at);
+		var then  = new Date(this.created_at);
 
 		var days = parseInt((today - then) / 1000 / 60 / 60 / 24);
 		if (days == 0)
@@ -132,7 +133,31 @@ var display_tweets = function (tweets)
 
 		this.days = days;
 
-		$('#col2').append(template(this));
+		var content = $(template(this));
+		$('#col2').append(content);
+
+		/*
+		if (this.geo)
+		{
+			content.css({"border": "1px solid red"})
+
+			var center = new google.maps.LatLng(this.geo.coordinates[0], this.geo.coordinates[1]);
+
+			new google.maps.Circle({
+				position: center,
+				map: map,
+				visible: true
+			});
+
+			var center = new google.maps.LatLng(this.geo.coordinates[1], this.geo.coordinates[0]);
+
+			new google.maps.Marker({
+				position: center,
+				map: map,
+				visible: true
+			});
+		}
+		*/
 	});
 }
 

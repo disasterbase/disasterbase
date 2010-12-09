@@ -1,0 +1,69 @@
+NB: replace [vhost root] below with the path to your virtual host
+root directory.
+
+1. make a mod_perl virtual host
+2. ln -s [vhost root]/ disasterlocal
+3. cd disasterlocal/
+4. git clone https://github.com/disasterbase/disasterbase.git
+5. ln -s disasterbase/lib perl
+6. ln -s disasterbase/view www
+7. populate disasterlocal/sqlengine.conf (
+DBI:mysql:[db]
+[user]
+[password]
+) with values from your local database installation
+8. add to your modperl.conf (mine goes in disasterlocal) :
+
+### Mason Mod_Perl Configuration
+
+PerlModule HTML::Mason::ApacheHandler
+
+AddType text/html .mhtml
+
+<FilesMatch "\.(mhtml)$">
+SetHandler perl-script
+PerlHandler HTML::Mason::ApacheHandler
+</FilesMatch>
+
+# uncomment in to allow dhandled URLs
+# SetHandler perl-script
+# PerlHandler HTML::Mason::ApacheHandler
+
+DirectoryIndex index.mhtml index.html
+
+Options +Multiviews
+
+<FilesMatch ".*.(css|png)$">
+SetHandler default-handler
+</FilesMatch>
+
+PerlSetVar MasonDataDir [vhost root]/var/mason_data
+
+# because I don't like naming files autohandler and dhandler
+PerlSetVar MasonAutohandlerName default.mwrap
+PerlSetVar MasonDhandlerName wildcard.mhtml
+
+# Make sure people don't call include files directly
+<FilesMatch ".(minc)$">
+SetHandler perl-script
+PerlInitHandler Apache::Constants::NOT_FOUND
+</FilesMatch>
+
+### Use local password file to control devel access
+<LocationMatch "^/devel/">
+  AuthType Basic
+	AuthName "Developer Access"
+	AuthUserFile [vhost root]/devel.passwd
+	Require valid-user
+</LocationMatch>
+
+# Error handling
+PerlSetVar MasonErrorMode fatal
+PerlSetVar MasonErrorFormat text
+
+# Default output from <% expression %> to HTML escaping; use |n to override.
+PerlSetVar MasonDefaultEscapeFlags h
+
+<Perl>
+use lib '[vhost root]/perl';
+</Perl>

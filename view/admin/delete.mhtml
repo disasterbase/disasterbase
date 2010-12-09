@@ -3,6 +3,12 @@ $id
 $table
 </%args>
 <%perl>
+
+# sample uses :
+
+# to delete a row
+# delete?table=user&id=2
+
 my $sqldb = Disaster::SQLEngine::sqldb();
 # add some error protection here to confirm table name is valid
 

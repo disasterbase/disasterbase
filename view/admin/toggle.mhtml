@@ -5,6 +5,15 @@ $column
 $value => ''
 </%args>
 <%perl>
+
+# sample uses :
+
+# to flip a bit
+# toggle?table=user&column=approved&id=1
+
+# to set a value
+# toggle?table=organization&column=name&value=Red%20Cross%Two&id=2
+
 my $sqldb = Disaster::SQLEngine::sqldb();
 # add some error protection here to confirm table name is valid
 my $data = $sqldb->fetch_one(table => $table, where => $table . '_id=' . $id);
